@@ -16,7 +16,6 @@ export default defineConfig({
             handler: "CacheFirst",
             options: {
               cacheName: "Milesto",
-              networkTimeoutSeconds: 10, 
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 * 7,
