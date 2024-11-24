@@ -24,6 +24,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Trash2,
+  CheckCircle,
 } from "lucide-react";
 import {
   Select,
@@ -97,6 +98,8 @@ export default function PlanningDayPage() {
   const [onDeleting, setOnDeleting] = useState<boolean>(false);
   const [commingSoon, setCommingSoon] = useState<boolean>(false);
   const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
+  const [isCompleting, setIsCompleting] = useState(false);
+
   // Fetch goals on initial load
   useEffect(() => {
     if (status === "idle") {
@@ -208,27 +211,31 @@ export default function PlanningDayPage() {
       return scheduleDate === selectedDateFormatted;
     });
 
-    if (scheduleForSelectedDate) {
-      if (currentTask) {
-        dispatch(
-          editTask({ _id: scheduleForSelectedDate._id, task: task as Task })
-        );
+    setIsCompleting(true);
+    setTimeout(() => {
+      if (scheduleForSelectedDate) {
+        if (currentTask) {
+          dispatch(
+            editTask({ _id: scheduleForSelectedDate._id, task: task as Task })
+          );
+        } else {
+          dispatch(
+            addTaskToSchedule({ scheduleId: scheduleForSelectedDate._id, task })
+          );
+        }
       } else {
         dispatch(
-          addTaskToSchedule({ scheduleId: scheduleForSelectedDate._id, task })
+          createSchedule({
+            date: format(selectedDate, "yyyy-MM-dd"),
+            tasks: [task],
+          })
         );
       }
-    } else {
-      dispatch(
-        createSchedule({
-          date: format(selectedDate, "yyyy-MM-dd"),
-          tasks: [task],
-        })
-      );
-    }
+      setIsCompleting(false);
+      setShowTaskModal(false);
+    }, 1000);
 
     dispatch(fetchSchedules());
-    setShowTaskModal(false);
     setCurrentTask(null);
   };
 
@@ -680,8 +687,24 @@ export default function PlanningDayPage() {
                 </div>
                 <Button
                   type="submit"
+                  disabled={isCompleting}
                   className="w-full bg-[#A8DCE7] text-[#101422] hover:bg-[#272B3B] hover:text-[#A8DCE7] mt-4 transition-colors duration-200"
                 >
+                  {isCompleting ? (
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      className="mr-2"
+                    >
+                      <CheckCircle className="h-5 w-5" />
+                    </motion.div>
+                  ) : (
+                    <CheckCircle className="h-5 w-5 mr-2" />
+                  )}
                   {currentTask ? "Update Task" : "Add Task"}
                 </Button>
               </form>

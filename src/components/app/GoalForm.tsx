@@ -15,6 +15,8 @@ import {
 import { useAppDispatch } from "@/app/hooks";
 import { createGoal, editGoal, fetchGoals } from "@/features/goals/goalsSlice";
 import { Goals as Goal, Milestone } from "@/types/index";
+import { CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface GoalFormInterface {
   goal: Goal | null;
@@ -30,6 +32,7 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
   const [category, setCategory] = useState("");
   const [priority, setPriority] = useState<Priority>("moyenne");
   const [status, setStatus] = useState<Status>("non démarré");
+  const [isCompleting, setIsCompleting] = useState(false);
   const [editedGoal, setEditedGoal] = useState<Goal>(
     goal || {
       _id: "",
@@ -73,6 +76,7 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
   }, [dispatch]);
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setIsCompleting(true);
     e.preventDefault();
     const newGoal: Goal = {
       title,
@@ -87,8 +91,11 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
       createdAt: goal?.createdAt || new Date(),
       updatedAt: new Date(),
     };
-
-    await dispatch(createGoal(newGoal));
+    setTimeout(async () => {
+      await dispatch(createGoal(newGoal));
+      setIsCompleting(false);
+      onClose();
+    }, 1000);
     onClose();
   };
 
@@ -105,7 +112,12 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
   };
 
   const handleEdit = async () => {
-    await dispatch(editGoal(editedGoal));
+    setIsCompleting(true);
+    setTimeout(async () => {
+      await dispatch(editGoal(editedGoal));
+      setIsCompleting(false);
+      onClose();
+    }, 1000);
     dispatch(fetchGoals());
     onClose();
   };
@@ -293,8 +305,20 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
       <div className="flex justify-end space-x-2">
         <Button
           type="submit"
+          disabled={isCompleting}
           className="bg-[#A8DCE7] text-[#101422] hover:bg-[#272B3B] hover:text-[#A8DCE7] rounded-full"
         >
+          {isCompleting ? (
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="mr-2"
+            >
+              <CheckCircle className="h-5 w-5" />
+            </motion.div>
+          ) : (
+            <CheckCircle className="h-5 w-5 mr-2" />
+          )}
           Save
         </Button>
       </div>
@@ -523,8 +547,20 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
         </Button>
         <Button
           type="submit"
+          disabled={isCompleting}
           className="bg-[#A8DCE7] text-[#101422] hover:bg-[#272B3B] hover:text-[#FFFFFF] transition-colors duration-200 rounded-full"
         >
+          {isCompleting ? (
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="mr-2"
+            >
+              <CheckCircle className="h-5 w-5" />
+            </motion.div>
+          ) : (
+            <CheckCircle className="h-5 w-5 mr-2" />
+          )}
           Save Changes
         </Button>
       </div>
