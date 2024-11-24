@@ -13,7 +13,7 @@ export default defineConfig({
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/milesto-backend.vercel.app\/.*/i,
-            handler: "CacheFirst",
+            handler: "NetworkFirst",
             options: {
               cacheName: "Milesto",
               expiration: {
