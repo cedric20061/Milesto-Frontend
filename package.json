@@ -36,7 +36,8 @@
     "react-router-dom": "^6.27.0",
     "recharts": "^2.13.3",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vite-plugin-pwa": "^0.21.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
