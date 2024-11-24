@@ -2,12 +2,13 @@ import { Home, BarChart2, Target, Calendar, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const navItems = [
-  { name: "Accueil", href: "/", icon: Home },
-  { name: "Statistiques", href: "/statistics", icon: BarChart2 },
-  { name: "Objectifs", href: "/goals", icon: Target },
-  { name: "Planification", href: "/day-planning", icon: Calendar },
-  { name: "Paramètres", href: "/settings", icon: Settings },
+  { name: "Home", href: "/", icon: Home },
+  { name: "Statistics", href: "/statistics", icon: BarChart2 },
+  { name: "Goals", href: "/goals", icon: Target },
+  { name: "Planning", href: "/day-planning", icon: Calendar },
+  { name: "Settings", href: "/settings", icon: Settings },
 ];
+
 
 const Footer = () => {
   return (

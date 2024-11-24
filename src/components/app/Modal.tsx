@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           />
 
           <motion.div
-            className="relative bg-[#FFFFFF] dark:bg-[#272B3B] rounded-xl shadow-2xl max-h-[90vh] overflow-y-auto p-8 w-[90%] sm:w-4/5 lg:w-2/3 xl:w-1/2 z-10 border border-[#A8DCE7]/20"
+            className="relative bg-[#FFFFFF] dark:bg-[#272B3B] rounded-xl shadow-2xl max-h-[90vh] overflow-y-auto p-0 md:p-8 w-[90%] sm:w-4/5 lg:w-2/3 xl:w-1/2 z-10 border border-[#A8DCE7]/20"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}

@@ -4,11 +4,11 @@ import ThemeSwitcher from "@/components/app/ThemeSwitcher";
 import { Link } from "react-router-dom";
 
 const navItems = [
-  { name: "Accueil", href: "/", icon: Home },
-  { name: "Statistiques", href: "/statistics", icon: BarChart2 },
-  { name: "Objectifs", href: "/goals", icon: Target },
-  { name: "Planification", href: "/day-planning", icon: Calendar },
-  { name: "Paramètres", href: "/settings", icon: Settings },
+  { name: "Home", href: "/", icon: Home },
+  { name: "Statistics", href: "/statistics", icon: BarChart2 },
+  { name: "Goals", href: "/goals", icon: Target },
+  { name: "Planning", href: "/day-planning", icon: Calendar },
+  { name: "Settings", href: "/settings", icon: Settings },
 ];
 
 export default function Header() {
