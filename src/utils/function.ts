@@ -1,5 +1,4 @@
 import { DailySchedule } from "@/types";
-import { format } from "date-fns";
 
 export function translateToFrench(input: string): string {
   const translations: { [key: string]: string } = {
@@ -23,10 +22,23 @@ export const formatTime = (time: number) => {
     .padStart(2, "0")}`;
 };
 
-export const getScheduleForDate = (date: Date, schedules: DailySchedule[]): DailySchedule | undefined => {
-  return schedules.find((schedule) => {
-    const scheduleDate = format(new Date(schedule.date), "yyyy-MM-dd");
-    const targetDate = format(date, "yyyy-MM-dd");
-    return scheduleDate === targetDate;
-  });
+export const getScheduleForDate = (
+  date: string,
+  schedules: DailySchedule[]
+): DailySchedule | undefined => {
+  return schedules.find((schedule) => schedule.date === date);
 };
+
+export const formatTimeForInput = (dateOrString?: Date | string): string => {
+  if (!dateOrString) return "";
+
+  // Si c'est une chaîne, on la convertit en Date
+  const date =
+    typeof dateOrString === "string" ? new Date(dateOrString) : dateOrString;
+
+  // Formater l'heure et les minutes
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
+

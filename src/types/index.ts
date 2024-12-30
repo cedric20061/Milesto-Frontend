@@ -36,8 +36,8 @@ export interface Task {
   priority: "haute" | "moyenne" | "basse"; // Priority level
   status: "à faire" | "en cours" | "complet"; // Task status
   estimatedTime: number; // Estimated time in minutes
-  startTime?: Date; // Optional start time
-  endTime?: Date; // Optional end time
+  startTime?: string; // Optional start time
+  endTime?: string; // Optional end time
 }
 
 // DailySchedule interface represents the daily schedule structure

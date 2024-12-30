@@ -106,7 +106,7 @@ export default function TaskUpdateModal({ task, isOpen, onClose, onStatusChange 
                       <Calendar className="h-4 w-4 text-[#272B3B] dark:text-[#A8DCE7]" />
                       <span className="font-medium text-[#101422] dark:text-[#A8DCE7]">Start Time:</span>
                       <span className="text-[#272B3B] dark:text-[#FFFFFF]">
-                        {new Date(task.startTime).toLocaleTimeString()}
+                        {new Date(`1970-01-01T${task.startTime}:00`).toLocaleTimeString()}
                       </span>
                     </div>
                   )}
@@ -115,7 +115,7 @@ export default function TaskUpdateModal({ task, isOpen, onClose, onStatusChange 
                       <Calendar className="h-4 w-4 text-[#272B3B] dark:text-[#A8DCE7]" />
                       <span className="font-medium text-[#101422] dark:text-[#A8DCE7]">End Time:</span>
                       <span className="text-[#272B3B] dark:text-[#FFFFFF]">
-                        {new Date(task.endTime).toLocaleTimeString()}
+                        {new Date(`1970-01-01T${task.endTime}:00`).toLocaleTimeString()}
                       </span>
                     </div>
                   )}

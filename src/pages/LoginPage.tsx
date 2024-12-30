@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Lock, Mail, AlertCircle, ArrowLeft, User } from "lucide-react";
+import { Lock, Mail, AlertCircle, ArrowLeft, User, CheckCircle } from "lucide-react";
 import { useAppDispatch } from "@/app/hooks";
 import {
   loginUser as login,
@@ -43,6 +43,8 @@ export default function LoginPage() {
   const [resetSent, setResetSent] = useState(false);
   const [countdown, setCountdown] = useState(60);
   const [showNewPasswordField, setShowNewPasswordField] = useState(false);
+  const [isCompleting, setIsCompleting] = useState(false)
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -57,6 +59,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setIsCompleting(true)
     try {
       let result;
       if (isLogin) {
@@ -66,6 +69,9 @@ export default function LoginPage() {
       }
 
       if (result.meta.requestStatus === "fulfilled") {
+        setTimeout(() => {
+          setIsCompleting(false);
+        }, 2000);
         navigate("/");
         document.location.reload();
       } else {
@@ -76,8 +82,12 @@ export default function LoginPage() {
         );
       }
     } catch {
+      setTimeout(() => {
+        setIsCompleting(false);
+      }, 2000);
       setError("An unexpected error occurred. Please try again.");
     }
+
   };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
@@ -300,8 +310,20 @@ export default function LoginPage() {
               <motion.div variants={itemVariants}>
                 <Button
                   type="submit"
+                  disabled={isCompleting}
                   className="w-full bg-[#A8DCE7] hover:bg-[#272B3B] text-[#101422] hover:text-[#FFFFFF] dark:bg-[#272B3B] dark:hover:bg-[#A8DCE7] dark:text-[#FFFFFF] dark:hover:text-[#101422]"
                 >
+                  {isCompleting ? (
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="mr-2"
+                    >
+                      <CheckCircle className="h-5 w-5" />
+                    </motion.div>
+                  ) : (
+                    <CheckCircle className="h-5 w-5 mr-2" />
+                  )}
                   {isLogin ? "Login" : "Register"}
                 </Button>
               </motion.div>
@@ -341,6 +363,7 @@ export default function LoginPage() {
                   }}
                   className="text-sm text-[#272B3B] dark:text-[#FFFFFF] hover:underline focus:outline-none"
                 >
+                  
                   {isLogin ? "Sign up" : "Login"}
                 </button>
                 {isLogin && (
