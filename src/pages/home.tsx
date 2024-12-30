@@ -20,6 +20,7 @@ import { fetchSchedules } from "@/features/dailySchedule/dailyScheduleSlice";
 import { getScheduleForDate } from "@/utils/function";
 import { useNavigate } from "react-router-dom";
 import { fetchUserInfo } from "@/features/auth/authSlice";
+import { format } from "date-fns";
 
 interface GoalCardProps {
   goal: Goal;
@@ -214,7 +215,7 @@ export default function HomePage() {
   }, [dispatch, status]);
 
   useEffect(() => {
-    setTodaySchedule(getScheduleForDate(new Date(), schedules));
+    setTodaySchedule(getScheduleForDate(format(new Date(), "yyyy-MM-dd"), schedules));
   }, [schedules]);
 
   const getSortedTasks = (tasks: Task[], maxTasks: number): Task[] => {
