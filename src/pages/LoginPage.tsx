@@ -80,6 +80,9 @@ export default function LoginPage() {
           JSON.parse(errorPayload).message ||
             "An error occurred. Please try again."
         );
+        setTimeout(() => {
+          setIsCompleting(false);
+        }, 2000);
       }
     } catch {
       setTimeout(() => {
