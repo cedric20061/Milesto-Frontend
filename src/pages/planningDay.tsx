@@ -184,8 +184,8 @@ export default function PlanningDayPage() {
   };
 
   const handleDeleteTask = async (scheduleId: string, taskId: string) => {
-    dispatch(deleteTask({ scheduleId, taskId }));
-    dispatch(fetchSchedules());
+    await dispatch(deleteTask({ scheduleId, taskId }));
+    await dispatch(fetchSchedules());
   };
   const handleStatusChange = (taskId: string, newStatus: "complet") => {
     const scheduleForSelectedDate = getScheduleForDate(format(selectedDate, "yyyy-MM-dd"), schedules);
