@@ -32,27 +32,30 @@ export default function ThemeSwitcher({ type = "button" }: ThemeSwitcherProps) {
 
   if (type === "dropdown") {
     return (
-      
       <div className="flex items-center space-x-2">
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => toggleDarkMode(false)}
-        className={`${isDark === false ? 'bg-[#A8DCE7] rounded-full' : 'rounded-full'}`}
-      >
-        <Sun className="h-[1.2rem] w-[1.2rem]" />
-        <span className="sr-only">Light mode</span>
-      </Button>
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => toggleDarkMode(true)}
-        className={`${isDark === true ? 'bg-[#A8DCE7] rounded-full' : 'rounded-full'}`}
-      >
-        <Moon className="h-[1.2rem] w-[1.2rem]" />
-        <span className="sr-only">Dark mode</span>
-      </Button>
-    </div>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => toggleDarkMode(false)}
+          className={`${
+            isDark === false ? "bg-[#A8DCE7] rounded-full" : "rounded-full"
+          }`}
+        >
+          <Sun className="h-[1.2rem] w-[1.2rem]" />
+          <span className="sr-only">Light mode</span>
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => toggleDarkMode(true)}
+          className={`${
+            isDark === true ? "bg-[#A8DCE7] rounded-full" : "rounded-full"
+          }`}
+        >
+          <Moon className="h-[1.2rem] w-[1.2rem]" />
+          <span className="sr-only">Dark mode</span>
+        </Button>
+      </div>
     );
   }
 

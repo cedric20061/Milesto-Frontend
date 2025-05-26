@@ -8,6 +8,9 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
+      devOptions: {
+        enabled: true, // <- Ajoute cette ligne pour tester en local
+      },
       workbox: {
         globPatterns: ["**/*.{js,css,png,ico,html,svg,json}"],
         runtimeCaching: [
