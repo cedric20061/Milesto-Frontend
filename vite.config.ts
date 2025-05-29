@@ -8,6 +8,13 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
+      strategies: "injectManifest",
+      srcDir: "src",
+      injectManifest: {
+        swSrc: "src/sw.js", // fichier source
+        swDest: "dist/sw.js", // fichier final dans dist/
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg}"],
+      },
       devOptions: {
         enabled: true, // <- Ajoute cette ligne pour tester en local
       },
