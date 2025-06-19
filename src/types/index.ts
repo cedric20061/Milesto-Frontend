@@ -4,6 +4,7 @@ export interface Goals {
   title: string;
   description: string;
   category: string;
+  step: number;
   priority: "haute" | "moyenne" | "basse";
   status: "non démarré" | "en cours" | "complet";
   progress:  number;
@@ -17,6 +18,7 @@ export interface Milestone {
   everyDayAction: boolean;
   _id?: string;
   title: string;
+  step: number;
   description?: string;
   completed: boolean;
   status: string,

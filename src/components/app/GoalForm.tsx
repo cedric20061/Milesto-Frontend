@@ -32,6 +32,7 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
   const [category, setCategory] = useState("");
   const [priority, setPriority] = useState<Priority>("moyenne");
   const [status, setStatus] = useState<Status>("non démarré");
+  const [step, setStep] = useState<number>(0);
   const [isCompleting, setIsCompleting] = useState(false);
   const [editedGoal, setEditedGoal] = useState<Goal>(
     goal || {
@@ -39,6 +40,7 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
       userId: "",
       title: "",
       description: "",
+      step: 0,
       category: "",
       priority: "moyenne",
       status: "non démarré",
@@ -54,6 +56,7 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
   const [newMilestone, setNewMilestone] = useState<Milestone>({
     title: "",
     description: "",
+    step: 0,
     targetDate: new Date(),
     completed: false,
     everyDayAction: false,
@@ -82,6 +85,7 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
       title,
       description,
       category,
+      step,
       priority,
       status,
       targetDate: new Date(targetDate),
@@ -105,6 +109,7 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
       title: "",
       description: "",
       completed: false,
+      step: 0,
       targetDate: new Date(),
       everyDayAction: false,
       status: "non démarré",
@@ -166,7 +171,19 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
           className="bg-[#FFFFFF] dark:bg-[#272B3B] text-[#101422] dark:text-[#A8DCE7] border-[#A8DCE7] dark:border-[#101422]"
         />
       </div>
-
+      <div>
+        <Label htmlFor="step" className="text-[#101422] dark:text-[#A8DCE7]">
+          Step
+        </Label>
+        <Input
+          id="step"
+          type="number"
+          value={step}
+          onChange={(e) => setStep(Number(e.target.value))}
+          required
+          className="bg-[#FFFFFF] dark:bg-[#272B3B] text-[#101422] dark:text-[#A8DCE7] border-[#A8DCE7] dark:border-[#101422]"
+        />
+      </div>
       <div>
         <Label
           htmlFor="priority"
@@ -276,7 +293,17 @@ const GoalForm: React.FC<GoalFormInterface> = ({ goal, onClose }) => {
             }
             className="bg-[#FFFFFF] dark:bg-[#272B3B] text-[#101422] dark:text-[#A8DCE7] border-[#A8DCE7] dark:border-[#101422]"
           />
-
+          <Input
+            type="number"
+            placeholder="Milestone Step"
+            onChange={(e) =>
+              setNewMilestone({
+                ...newMilestone,
+                step: Number(e.target.value),
+              })
+            }
+            className="bg-[#FFFFFF] dark:bg-[#272B3B] text-[#101422] dark:text-[#A8DCE7] border-[#A8DCE7] dark:border-[#101422]"
+          />
           <Select
             value={newMilestone.status}
             onValueChange={(status) =>
