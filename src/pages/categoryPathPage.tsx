@@ -187,16 +187,16 @@ const mockGoals: Goals[] = [
   },
 ];
 
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case "complet":
-      return "bg-green-500";
-    case "en cours":
-      return "bg-blue-500";
-    default:
-      return "bg-gray-300";
-  }
-};
+// const getStatusColor = (status: string) => {
+//   switch (status) {
+//     case "complet":
+//       return "bg-green-500";
+//     case "en cours":
+//       return "bg-blue-500";
+//     default:
+//       return "bg-gray-300";
+//   }
+// };
 
 const getStatusIcon = (status: string, completed?: boolean) => {
   if (completed || status === "complet") {

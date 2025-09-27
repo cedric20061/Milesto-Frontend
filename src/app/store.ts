@@ -2,6 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '@/features/auth/authSlice.ts';
 import goalsReducer from '@/features/goals/goalsSlice';
+import todoReducer from '@/features/todo/todoSlice';
 import dailyScheduleReducer from '@/features/dailySchedule/dailyScheduleSlice';
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     auth: authReducer,
     goals: goalsReducer,
     dailySchedule: dailyScheduleReducer,
+    todos: todoReducer
   },
 });
 

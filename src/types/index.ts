@@ -63,3 +63,20 @@ export interface UserInterface {
   email: string;
   password: string;
 }
+
+export interface TodoItem {
+  _id: string;
+  title: string;
+  completed: boolean;
+  createdAt: string;
+}
+
+export interface TodoList {
+  _id: string;
+  userId: string;
+  name: string;
+  description?: string;
+  items: TodoItem[];
+  createdAt: string;
+  color: string;
+}
