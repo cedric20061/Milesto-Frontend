@@ -32,13 +32,20 @@ export const getScheduleForDate = (
 export const formatTimeForInput = (dateOrString?: Date | string): string => {
   if (!dateOrString) return "";
 
-  // Si c'est une chaîne, on la convertit en Date
+  // ✅ Si c'est une chaîne au format "HH:mm", on la retourne telle quelle
+  if (typeof dateOrString === "string" && /^\d{2}:\d{2}$/.test(dateOrString)) {
+    return dateOrString;
+  }
+
+  // ✅ Sinon, si c'est une date ou une chaîne de date complète
   const date =
     typeof dateOrString === "string" ? new Date(dateOrString) : dateOrString;
 
-  // Formater l'heure et les minutes
+  if (isNaN(date.getTime())) return ""; // ⛔ Gérer les dates invalides
+
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
   return `${hours}:${minutes}`;
 };
+
 

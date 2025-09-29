@@ -124,7 +124,7 @@ const goalsSlice = createSlice({
       // Handle editGoal
       .addCase(editGoal.fulfilled, (state, action) => {
         const index = state.goals.findIndex(
-          (goal) => goal._id === action.payload.id
+          (goal) => goal._id === action.payload._id
         );
         if (index !== -1) {
           state.goals[index] = action.payload;

@@ -158,7 +158,7 @@ export default function TodoListManager() {
 
         {/* Empty state */}
         <motion.div
-          className="flex flex-col items-center justify-center h-64 text-center space-y-6 bg-indigo-50 dark:bg-[#272B3B] rounded-lg shadow-lg p-8"
+          className="flex flex-col items-center justify-center h-64 text-center space-y-6 bg-indigo-50 dark:bg-[#272B3B] rounded-lg shadow-lg p-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
